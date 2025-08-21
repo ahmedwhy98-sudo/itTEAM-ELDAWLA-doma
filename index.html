@@ -19,9 +19,11 @@
       letter-spacing: 3px;
       background: #000;
       border-bottom: 2px solid red;
+      animation: fadeDown 1.5s ease;
     }
     .buttons {
       margin: 50px;
+      animation: fadeUp 1.5s ease;
     }
     button {
       background: black;
@@ -38,11 +40,12 @@
     button:hover {
       background: red;
       color: black;
-      transform: scale(1.1);
+      transform: scale(1.1) rotate(-2deg);
     }
     .section {
       display: none;
       padding: 40px;
+      animation: fadeIn 1.2s ease;
     }
     .card {
       background: #111;
@@ -52,6 +55,7 @@
       width: 80%;
       box-shadow: 0 0 25px rgba(255,0,0,0.4);
       font-size: 20px;
+      animation: zoomIn 0.8s ease;
     }
     .card h3 {
       font-size: 30px;
@@ -66,10 +70,30 @@
       font-size: 18px;
       font-weight: bold;
       border-radius: 10px;
+      transition: 0.3s;
     }
     .contact-btn:hover {
       background: red;
       color: black;
+      transform: scale(1.1);
+    }
+
+    /* ========== انيميشن ========== */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
@@ -113,7 +137,9 @@
   <script>
     function showSection(id) {
       document.querySelectorAll(".section").forEach(sec => sec.style.display = "none");
-      document.getElementById(id).style.display = "block";
+      const sec = document.getElementById(id);
+      sec.style.display = "block";
+      sec.style.animation = "fadeIn 1s ease"; // انيميشن عند الانتقال
     }
 
     function showBFRA() {
@@ -151,4 +177,4 @@
     });
   </script>
 </body>
-  </html>
+</html>
