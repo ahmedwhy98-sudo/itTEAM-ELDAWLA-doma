@@ -76,7 +76,6 @@
 
   <!-- مشغل الأغنية -->
   <audio id="bg-music" autoplay loop playsinline preload="auto" muted>
-    <!-- غيّر اسم الملف لو مختلف وحط الأغنية في نفس الفولدر -->
     <source src="doma.mp3?v=2" type="audio/mpeg">
   </audio>
 
@@ -88,9 +87,8 @@
   <!-- قسم المؤسسين -->
   <div id="founders" class="section">
     <h2>المؤسسين</h2>
-    <button onclick="showBFRA()">BFRA</button>
-    <button onclick="showDOMA()">DOMA</button>
-    <div id="founder-info"></div>
+    <button onclick="showFounder('BFRA')">BFRA</button>
+    <button onclick="showFounder('DOMA')">DOMA</button>
   </div>
 
   <!-- قسم الأعضاء -->
@@ -99,46 +97,46 @@
     <p>🚧 تحت التطوير 🚧</p>
   </div>
 
+  <!-- قسم عرض المؤسس بشكل منفصل -->
+  <div id="founder-info" class="section"></div>
+
   <script>
     function showSection(id) {
       document.querySelectorAll(".section").forEach(sec => sec.style.display = "none");
       document.getElementById(id).style.display = "block";
     }
 
-    function showBFRA() {
-      document.getElementById("founder-info").innerHTML = `
-        <div class="card">
-          <h3>BFRA</h3>
-          <p>بفرا مز التيم وليدر التيم... غني فناء فاحش مطروش وشرير</p>
-          <a href="https://t.me/Bfra10" target="_blank">
-            <button class="contact-btn">التواصل مع BFRA</button>
-          </a>
-        </div>
-      `;
+    function showFounder(name) {
+      document.querySelectorAll(".section").forEach(sec => sec.style.display = "none");
+      let content = "";
+      if (name === "BFRA") {
+        content = `
+          <div class="card">
+            <h3>BFRA</h3>
+            <p>بفرا مز التيم وليدر التيم... غني فناء فاحش مطروش وشرير</p>
+            <a href="https://t.me/Bfra10" target="_blank">
+              <button class="contact-btn">التواصل مع BFRA</button>
+            </a>
+          </div>`;
+      } else if (name === "DOMA") {
+        content = `
+          <div class="card">
+            <h3>DOMA</h3>
+            <p>دوما اونر التيم مز فشخ وهو العامل الموقع... ويب دزاينر والبنات بتجري وراه من كتر حلاوته</p>
+            <a href="https://t.me/iixixic" target="_blank">
+              <button class="contact-btn">التواصل مع DOMA</button>
+            </a>
+          </div>`;
+      }
+      const infoDiv = document.getElementById("founder-info");
+      infoDiv.innerHTML = content;
+      infoDiv.style.display = "block";
     }
 
-    function showDOMA() {
-      document.getElementById("founder-info").innerHTML = `
-        <div class="card">
-          <h3>DOMA</h3>
-          <p>دوما اونر التيم مز فشخ وهو العامل الموقع... ويب دزاينر والبنات بتجري وراه من كتر حلاوته</p>
-          <a href="https://t.me/iixixic" target="_blank">
-            <button class="contact-btn">التواصل مع DOMA</button>
-          </a>
-        </div>
-      `;
-    }
-
-    // محاولة تشغيل تلقائي + فتح الصوت أول تفاعل بدون أزرار
+    // تشغيل الأغنية
     const audio = document.getElementById("bg-music");
     function tryPlay(){ audio.play().catch(()=>{}); }
-
-    // شغّل (Muted) عند التحميل
-    window.addEventListener("load", () => {
-      tryPlay();
-    });
-
-    // فك الـMute عند أول تفاعل (كليك/لمس/مفتاح/حركة/سكروول)
+    window.addEventListener("load", () => { tryPlay(); });
     function unlock() {
       audio.muted = false;
       tryPlay();
@@ -150,8 +148,6 @@
     ['click','touchstart','keydown','mousemove','scroll'].forEach(ev =>
       document.addEventListener(ev, unlock, { once: true })
     );
-
-    // بعض المتصفحات تحتاج AudioContext يتفتح بلمسة
     try {
       const Ctx = window.AudioContext || window.webkitAudioContext;
       if (Ctx) window.__ctx = new Ctx();
