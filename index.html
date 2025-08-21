@@ -1,154 +1,178 @@
-<!DOCTYPE html>  
-<html lang="ar">  
-<head>  
-  <meta charset="UTF-8">  
-  <title>TEAM EL DAWLA</title>  
-  <style>  
-    body {  
-      margin: 0;  
-      padding: 0;  
-      font-family: "Tahoma", sans-serif;  
-      background: #000;  
-      color: white;  
-      text-align: center;  
-    }  
-    header {  
-      padding: 50px 20px;  
-      font-size: 40px;  
-      font-weight: bold;  
-      letter-spacing: 3px;  
-      background: #111;  
-      box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);  
-    }  
-    .buttons {  
-      margin: 40px;  
-    }  
-    button {  
-      background: #000;  
-      color: red;  
-      border: 3px solid red;  
-      padding: 20px 40px;  
-      margin: 15px;  
-      font-size: 22px;  
-      font-weight: bold;  
-      cursor: pointer;  
-      border-radius: 15px;  
-      transition: 0.3s;  
-    }  
-    button:hover {  
-      background: red;  
-      color: black;  
-      transform: scale(1.1);  
-      box-shadow: 0 0 20px red;  
-    }  
-    .section {  
-      display: none;  
-      padding: 30px;  
-      animation: fadeIn 0.7s ease-in-out;  
-    }  
-    .card {  
-      background: #111;  
-      padding: 30px;  
-      border-radius: 20px;  
-      margin: 30px auto;  
-      width: 80%;  
-      box-shadow: 0 0 20px rgba(255,0,0,0.4);  
-      font-size: 20px;  
-    }  
-    .card h3 {  
-      font-size: 26px;  
-      color: red;  
-    }  
-    .contact-btn {  
-      background: black;  
-      border: 2px solid red;  
-      color: red;  
-      padding: 15px 25px;  
-      font-size: 20px;  
-      font-weight: bold;  
-      border-radius: 10px;  
-      transition: 0.3s;  
-    }  
-    .contact-btn:hover {  
-      background: red;  
-      color: black;  
-      box-shadow: 0 0 15px red;  
-    }  
-    @keyframes fadeIn {  
-      from { opacity: 0; transform: translateY(20px); }  
-      to { opacity: 1; transform: translateY(0); }  
-    }  
-  </style>  
-</head>  
-<body>  
-  
-  <header>  
-    تيم الدولة ┆ 𝐓𝐄𝐀𝐌 𝐄𝐋 𝐃𝐀𝐖𝐋𝐀  
-  </header>  
-  
-  <!-- مشغل الأغنية -->  
-  <audio id="bg-music" autoplay loop>  
-    <source src="doma.mp3" type="audio/mpeg">  
-  </audio>  
-  
-  <div class="buttons">  
-    <button onclick="showSection('founders')">قسم المؤسسين</button>  
-    <button onclick="showSection('members')">قسم الأعضاء</button>  
-  </div>  
-  
-  <!-- قسم المؤسسين -->  
-  <div id="founders" class="section">  
-    <h2>المؤسسين</h2>  
-    <button onclick="showBFRA()">BFRA</button>  
-    <button onclick="showDOMA()">DOMA</button>  
-    <div id="founder-info"></div>  
-  </div>  
-  
-  <!-- قسم الأعضاء -->  
-  <div id="members" class="section">  
-    <h2>قسم الأعضاء</h2>  
-    <p>🚧 تحت التطوير 🚧</p>  
-  </div>  
-  
-  <script>  
-    function showSection(id) {  
-      document.querySelectorAll(".section").forEach(sec => sec.style.display = "none");  
-      document.getElementById(id).style.display = "block";  
-    }  
-  
-    function showBFRA() {  
-      document.getElementById("founder-info").innerHTML = `  
-        <div class="card">  
-          <h3>BFRA</h3>  
-          <p>بفرا مز التيم وليدر التيم... غني فناء فاحش مطروش وشرير</p>  
-          <a href="https://t.me/Bfra10" target="_blank">  
-            <button class="contact-btn">التواصل مع BFRA</button>  
-          </a>  
-        </div>  
-      `;  
-    }  
-  
-    function showDOMA() {  
-      document.getElementById("founder-info").innerHTML = `  
-        <div class="card">  
-          <h3>DOMA</h3>  
-          <p>دوما اونر التيم مز فشخ وهو العامل الموقع... ويب دزاينر والبنات بتجري وراه من كتر حلاوته</p>  
-          <a href="https://t.me/iixixic" target="_blank">  
-            <button class="contact-btn">التواصل مع DOMA</button>  
-          </a>  
-        </div>  
-      `;  
-    }  
-  
-    // تشغيل الأغنية أوتوماتيك  
-    const audio = document.getElementById("bg-music");  
-    window.addEventListener("load", () => {  
-      audio.play().catch(() => {  
-        document.body.addEventListener("click", () => {  
-          audio.play();  
-        }, { once: true });  
-      });  
-    });  
-  </script>  
-</body>  
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>TEAM EL DAWLA</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Tahoma", sans-serif;
+      background: #000; /* خلفية سودة */
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
+    header {
+      padding: 50px 20px;
+      font-size: 35px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      background: #111;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+      animation: fadeDown 1.5s ease;
+    }
+
+    /* أزرار */
+    .buttons {
+      margin: 40px;
+      animation: fadeUp 2s ease;
+    }
+    button {
+      background: #000;
+      color: red;
+      border: 3px solid red;
+      font-weight: bold;
+      padding: 20px 35px;
+      margin: 15px;
+      font-size: 22px;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: 0.3s;
+      animation: pulse 2s infinite;
+    }
+    button:hover {
+      background: red;
+      color: black;
+      transform: scale(1.15);
+    }
+
+    /* الكروت */
+    .section {
+      display: none;
+      padding: 40px;
+      animation: fadeIn 1.5s ease;
+    }
+    .card {
+      background: #111;
+      padding: 40px;
+      border-radius: 20px;
+      margin: 30px auto;
+      width: 80%;
+      font-size: 20px;
+      box-shadow: 0 0 25px rgba(255,0,0,0.4);
+      animation: scaleIn 0.8s ease;
+    }
+
+    /* زرار التواصل */
+    .contact-btn {
+      background: black;
+      border: 2px solid red;
+      color: red;
+      font-weight: bold;
+      padding: 15px 25px;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+    .contact-btn:hover {
+      background: red;
+      color: black;
+      transform: scale(1.1);
+    }
+
+    /* أنيميشن */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    @keyframes scaleIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    تيم الدولة ┆ 𝐓𝐄𝐀𝐌 𝐄𝐋 𝐃𝐀𝐖𝐋𝐀
+  </header>
+
+  <!-- مشغل الأغنية -->
+  <audio id="bg-music" autoplay loop>
+    <source src="doma.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="buttons" id="main-buttons">
+    <button onclick="showSection('founders')">قسم المؤسسين</button>
+    <button onclick="showSection('members')">قسم الأعضاء</button>
+  </div>
+
+  <!-- قسم المؤسسين -->
+  <div id="founders" class="section">
+    <h2 style="animation: typing 3s steps(30, end), blink 0.7s infinite;">المؤسسين</h2>
+    <button onclick="showBFRA()">BFRA</button>
+    <button onclick="showDOMA()">DOMA</button>
+    <div id="founder-info"></div>
+  </div>
+
+  <!-- قسم الأعضاء -->
+  <div id="members" class="section">
+    <h2 style="animation: typing 3s steps(30, end), blink 0.7s infinite;">قسم الأعضاء</h2>
+    <p style="font-size:22px; font-weight:bold;">🚧 تحت التطوير 🚧</p>
+  </div>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll(".section").forEach(sec => sec.style.display = "none");
+      document.getElementById("main-buttons").style.display = "none"; 
+      document.getElementById(id).style.display = "block";
+    }
+
+    function showBFRA() {
+      document.getElementById("founder-info").innerHTML = `
+        <div class="card">
+          <h3>BFRA</h3>
+          <p>بفرا مز التيم وليدر التيم... غني فناء فاحش مطروش وشرير</p>
+          <a href="https://t.me/Bfra10" target="_blank">
+            <button class="contact-btn">التواصل مع BFRA</button>
+          </a>
+        </div>
+      `;
+    }
+
+    function showDOMA() {
+      document.getElementById("founder-info").innerHTML = `
+        <div class="card">
+          <h3>DOMA</h3>
+          <p>دوما اونر التيم مز فشخ وهو العامل الموقع... ويب دزاينر والبنات بتجري وراه من كتر حلاوته</p>
+          <a href="https://t.me/iixixic" target="_blank">
+            <button class="contact-btn">التواصل مع DOMA</button>
+          </a>
+        </div>
+      `;
+    }
+
+    // تشغيل الأغنية أوتوماتيك
+    const audio = document.getElementById("bg-music");
+    window.addEventListener("load", () => {
+      audio.play().catch(() => {
+        document.body.addEventListener("click", () => {
+          audio.play();
+        }, { once: true });
+      });
+    });
+  </script>
+</body>
 </html>
