@@ -8,53 +8,68 @@
       margin: 0;
       padding: 0;
       font-family: "Tahoma", sans-serif;
-      background: linear-gradient(to right, #000000, #1a1a1a);
+      background: #000;
       color: white;
       text-align: center;
     }
     header {
-      padding: 50px 20px;
-      font-size: 35px;
+      padding: 40px 20px;
+      font-size: 40px;
       font-weight: bold;
       letter-spacing: 3px;
-      background: #111;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      background: #000;
+      border-bottom: 2px solid red;
     }
     .buttons {
-      margin: 40px;
+      margin: 50px;
     }
     button {
-      background: crimson;
-      color: white;
-      border: none;
-      padding: 15px 25px;
-      margin: 10px;
-      font-size: 18px;
+      background: black;
+      color: red;
+      border: 3px solid red;
+      padding: 20px 40px;
+      margin: 15px;
+      font-size: 22px;
+      font-weight: bold;
       cursor: pointer;
-      border-radius: 10px;
+      border-radius: 15px;
       transition: 0.3s;
     }
     button:hover {
-      background: darkred;
+      background: red;
+      color: black;
       transform: scale(1.1);
     }
     .section {
       display: none;
-      padding: 30px;
+      padding: 40px;
     }
     .card {
-      background: #222;
-      padding: 20px;
-      border-radius: 15px;
-      margin: 20px auto;
-      width: 70%;
-      box-shadow: 0 0 15px rgba(255,255,255,0.1);
+      background: #111;
+      padding: 40px;
+      border-radius: 20px;
+      margin: 30px auto;
+      width: 80%;
+      box-shadow: 0 0 25px rgba(255,0,0,0.4);
+      font-size: 20px;
+    }
+    .card h3 {
+      font-size: 30px;
+      color: red;
+      margin-bottom: 20px;
     }
     .contact-btn {
-      background: teal;
+      background: black;
+      color: red;
+      border: 2px solid red;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 10px;
     }
     .contact-btn:hover {
-      background: darkcyan;
+      background: red;
+      color: black;
     }
   </style>
 </head>
@@ -66,27 +81,33 @@
 
   <!-- مشغل الأغنية -->
   <audio id="bg-music" autoplay loop>
-    <source src="doma.mp3" type="audio/mpeg">
+    <source src="YOUR_SONG.mp3" type="audio/mpeg">
   </audio>
 
-  <div class="buttons">
-    <button onclick="showSection('founders')">قسم المؤسسين</button>
-    <button onclick="showSection('members')">قسم الأعضاء</button>
+  <!-- الصفحة الرئيسية -->
+  <div id="home" class="section" style="display:block;">
+    <div class="buttons">
+      <button onclick="showSection('founders')">قسم المؤسسين</button>
+      <button onclick="showSection('members')">قسم الأعضاء</button>
+    </div>
   </div>
 
   <!-- قسم المؤسسين -->
   <div id="founders" class="section">
-    <h2>المؤسسين</h2>
-    <button onclick="showBFRA()">BFRA</button>
-    <button onclick="showDOMA()">DOMA</button>
-
+    <h2 style="color:red; font-size:35px;">المؤسسين</h2>
+    <div class="buttons">
+      <button onclick="showBFRA()">BFRA</button>
+      <button onclick="showDOMA()">DOMA</button>
+      <button onclick="showSection('home')">🔙 رجوع</button>
+    </div>
     <div id="founder-info"></div>
   </div>
 
   <!-- قسم الأعضاء -->
   <div id="members" class="section">
-    <h2>قسم الأعضاء</h2>
-    <p>🚧 تحت التطوير 🚧</p>
+    <h2 style="color:red; font-size:35px;">قسم الأعضاء</h2>
+    <p style="font-size:22px;">🚧 تحت التطوير 🚧</p>
+    <button onclick="showSection('home')">🔙 رجوع</button>
   </div>
 
   <script>
@@ -130,4 +151,4 @@
     });
   </script>
 </body>
-</html
+</html>
