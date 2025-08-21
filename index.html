@@ -45,6 +45,7 @@
       display: none;
       padding: 30px;
       animation: fadeIn 0.7s ease-in-out;
+      min-height: 100vh;
     }
     .card {
       background: #111;
@@ -87,7 +88,7 @@
   </header>
 
   <!-- مشغل الأغنية -->
-  <audio id="bg-music" loop>
+  <audio id="bg-music" autoplay loop>
     <source src="doma.mp3" type="audio/mpeg">
   </audio>
 
@@ -99,10 +100,8 @@
   <!-- قسم المؤسسين -->
   <div id="founders" class="section">
     <h2>المؤسسين</h2>
-    <div class="buttons">
-      <button onclick="showBFRA()">BFRA</button>
-      <button onclick="showDOMA()">DOMA</button>
-    </div>
+    <button onclick="showBFRA()">BFRA</button>
+    <button onclick="showDOMA()">DOMA</button>
     <div id="founder-info"></div>
   </div>
 
@@ -113,13 +112,12 @@
   </div>
 
   <script>
-    // عرض الأقسام
     function showSection(id) {
       document.querySelectorAll(".section").forEach(sec => sec.style.display = "none");
       document.getElementById(id).style.display = "block";
+      window.scrollTo(0,0); // يخليك يروح لفوق كل مرة يفتح القسم
     }
 
-    // المؤسسين
     function showBFRA() {
       document.getElementById("founder-info").innerHTML = `
         <div class="card">
@@ -144,15 +142,13 @@
       `;
     }
 
-    // تشغيل الأغنية أول ما تدوس أي زرار
+    // تشغيل الأغنية أوتوماتيك
     const audio = document.getElementById("bg-music");
-    let musicStarted = false;
-    document.querySelectorAll("button").forEach(btn => {
-      btn.addEventListener("click", () => {
-        if (!musicStarted) {
+    window.addEventListener("load", () => {
+      audio.play().catch(() => {
+        document.body.addEventListener("click", () => {
           audio.play();
-          musicStarted = true;
-        }
+        }, { once: true });
       });
     });
   </script>
