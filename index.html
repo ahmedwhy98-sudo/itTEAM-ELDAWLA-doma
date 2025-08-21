@@ -118,6 +118,16 @@
         </div>
       `;
     }
+
+    // تشغيل الأغنية أوتوماتيك
+    const audio = document.getElementById("bg-music");
+    window.addEventListener("load", () => {
+      audio.play().catch(() => {
+        document.body.addEventListener("click", () => {
+          audio.play();
+        }, { once: true });
+      });
+    });
   </script>
 </body>
-</html>
+</html
