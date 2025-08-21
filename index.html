@@ -20,9 +20,7 @@
       background: #111;
       box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
     }
-    .buttons {
-      margin: 40px;
-    }
+    .buttons { margin: 40px; }
     button {
       background: #000;
       color: red;
@@ -37,7 +35,7 @@
     }
     button:hover {
       background: red;
-      color: black;
+      color: #000;
       transform: scale(1.1);
       box-shadow: 0 0 20px red;
     }
@@ -55,12 +53,9 @@
       box-shadow: 0 0 20px rgba(255,0,0,0.4);
       font-size: 20px;
     }
-    .card h3 {
-      font-size: 26px;
-      color: red;
-    }
+    .card h3 { font-size: 26px; color: red; }
     .contact-btn {
-      background: black;
+      background: #000;
       border: 2px solid red;
       color: red;
       padding: 15px 25px;
@@ -69,15 +64,8 @@
       border-radius: 10px;
       transition: 0.3s;
     }
-    .contact-btn:hover {
-      background: red;
-      color: black;
-      box-shadow: 0 0 15px red;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .contact-btn:hover { background: red; color: #000; box-shadow: 0 0 15px red; }
+    @keyframes fadeIn { from {opacity:0; transform:translateY(20px)} to {opacity:1; transform:translateY(0)} }
   </style>
 </head>
 <body>
@@ -87,8 +75,9 @@
   </header>
 
   <!-- مشغل الأغنية -->
-  <audio id="bg-music" autoplay loop>
-    <source src="doma.mp3" type="audio/mpeg">
+  <audio id="bg-music" autoplay loop playsinline preload="auto" muted>
+    <!-- غيّر اسم الملف لو مختلف وحط الأغنية في نفس الفولدر -->
+    <source src="doma.mp3?v=2" type="audio/mpeg">
   </audio>
 
   <div class="buttons">
@@ -117,7 +106,7 @@
     }
 
     function showBFRA() {
-      document.getElementById("founder-info").innerHTML = 
+      document.getElementById("founder-info").innerHTML = `
         <div class="card">
           <h3>BFRA</h3>
           <p>بفرا مز التيم وليدر التيم... غني فناء فاحش مطروش وشرير</p>
@@ -125,11 +114,11 @@
             <button class="contact-btn">التواصل مع BFRA</button>
           </a>
         </div>
-      ;
+      `;
     }
 
     function showDOMA() {
-      document.getElementById("founder-info").innerHTML = 
+      document.getElementById("founder-info").innerHTML = `
         <div class="card">
           <h3>DOMA</h3>
           <p>دوما اونر التيم مز فشخ وهو العامل الموقع... ويب دزاينر والبنات بتجري وراه من كتر حلاوته</p>
@@ -137,18 +126,36 @@
             <button class="contact-btn">التواصل مع DOMA</button>
           </a>
         </div>
-      ;
+      `;
     }
 
-    // تشغيل الأغنية أوتوماتيك
+    // محاولة تشغيل تلقائي + فتح الصوت أول تفاعل بدون أزرار
     const audio = document.getElementById("bg-music");
+    function tryPlay(){ audio.play().catch(()=>{}); }
+
+    // شغّل (Muted) عند التحميل
     window.addEventListener("load", () => {
-      audio.play().catch(() => {
-        document.body.addEventListener("click", () => {
-          audio.play();
-        }, { once: true });
-      });
+      tryPlay();
     });
+
+    // فك الـMute عند أول تفاعل (كليك/لمس/مفتاح/حركة/سكروول)
+    function unlock() {
+      audio.muted = false;
+      tryPlay();
+      ['click','touchstart','keydown','mousemove','scroll'].forEach(ev =>
+        document.removeEventListener(ev, unlock)
+      );
+      if (window.__ctx && window.__ctx.state === 'suspended') { window.__ctx.resume().catch(()=>{}); }
+    }
+    ['click','touchstart','keydown','mousemove','scroll'].forEach(ev =>
+      document.addEventListener(ev, unlock, { once: true })
+    );
+
+    // بعض المتصفحات تحتاج AudioContext يتفتح بلمسة
+    try {
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      if (Ctx) window.__ctx = new Ctx();
+    } catch(e) {}
   </script>
 </body>
 </html>
